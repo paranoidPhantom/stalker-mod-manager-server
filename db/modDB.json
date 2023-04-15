@@ -1,0 +1,15 @@
+{
+    "mods": [
+        {
+            "name": "Инкубатор",
+            "description": "В модификации представлена новая история со средней продолжительностью, наполненная кат-сценами с озвучкой персонажей, а также с интригами, мистикой и перестрелками. ",
+            "rating": 8.8,
+            "imageURL": "https://i.ibb.co/GnNDDpG/awr1-Sz-U7m80.jpg",
+            "youtubeVideoID": "k_iH7gbyQBA",
+            "platform": "Зов припяти",
+            "downloadURL": "https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-large-zip-file.zip",
+            "standalone": false,
+            "game_required": "soc"
+        }
+    ]
+}
