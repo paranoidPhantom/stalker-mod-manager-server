@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const JSONdb = require('simple-json-db');
-const modsDB = new JSONdb('server/db/modDB.json');
+const modsDB = new JSONdb('db/modDB.json');
 
 
 // GET request to get all mods
