@@ -3,7 +3,9 @@ const cors = require('cors');
 const app = express();
 const JSONdb = require('simple-json-db');
 const modsDB = new JSONdb('db/modDB.json');
+require('dotenv').config()
 
+const port = process.env.PORT || 3000
 
 // GET request to get all mods
 app.get('/api/mods', (req, res) => {
@@ -47,7 +49,7 @@ app.post('/api/mods', (req, res) => {
   }
 });
 
-app.listen(3000, () => {
+app.listen(port, () => {
   console.clear()
-  console.log('Server listening on port 3000');
+  console.log(`Server listening on port ${port}`);
 });
