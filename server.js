@@ -8,6 +8,9 @@ const modsDB = new JSONdb('db/modDB.json');
 // GET request to get all mods
 app.get('/api/mods', (req, res) => {
   const mods = modsDB.JSON()["mods"];
+  mods.forEach((mod, id) => {
+    mod.id = id
+  })
   res.json(mods);
 });
 
