@@ -6,6 +6,8 @@ const modsDB = new JSONdb('db/modDB.json');
 require('dotenv').config()
 const port = process.env.PORT || 3000
 
+app.use(cors())
+
 // GET request to get all mods
 app.get('/api/mods', (req, res) => {
   const mods = modsDB.JSON()["mods"];
