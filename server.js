@@ -4,7 +4,6 @@ const app = express();
 const JSONdb = require('simple-json-db');
 const modsDB = new JSONdb('db/modDB.json');
 require('dotenv').config()
-
 const port = process.env.PORT || 3000
 
 // GET request to get all mods
@@ -21,7 +20,7 @@ app.get('/api/mods/:id', (req, res) => {
   const id = parseInt(req.params.id);
   let mod = null
   const dbCurrent = modsDB.JSON()
-  if (!dbCurrent.JSON()["mods"]) { modsDB.set("mods", []) }
+  if (!dbCurrent["mods"]) { modsDB.set("mods", []) }
   dbCurrent["mods"].forEach((data, elementID) => {
     if (id === elementID) {
       mod = data

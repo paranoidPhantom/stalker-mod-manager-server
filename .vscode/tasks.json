@@ -3,23 +3,12 @@
 	"tasks": [
 		{
 			"type": "npm",
-			"script": "electron:start",
+			"script": "server",
 			"problemMatcher": [],
-			"label": "npm: electron:start",
-			"detail": "electron .",
+			"label": "npm: server",
+			"detail": "nodemon server.js",
 			"group": {
 				"kind": "test",
-				"isDefault": true
-			}
-		},
-		{
-			"type": "npm",
-			"script": "make",
-			"problemMatcher": [],
-			"label": "npm: make",
-			"detail": "electron-forge make",
-			"group": {
-				"kind": "build",
 				"isDefault": true
 			}
 		}
