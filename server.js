@@ -85,6 +85,20 @@ app.post("/api/login", async (req, res) => {
     }
 });
 
+app.get("/api/validate", async (req, res) => {
+    const sessionsDB = new JSON_DB("db/sessionsDB.json");
+    const { session } = req.query;
+    const valid = sessionsDB.has(`_session_${session}`)
+    res.json({ valid: valid });
+})
+
+app.get("/api/data", async (req, res) => {
+    const sessionsDB = new JSON_DB("db/sessionsDB.json");
+    const { session } = req.query;
+    const valid = sessionsDB.has(`_session_${session}`)
+    res.json({ valid: valid });
+})
+
 app.listen(port, () => {
     console.clear();
     console.log(`Server listening on port ${port}`.rainbow);

@@ -6,8 +6,6 @@ const { Keyboard } = require('telegram-keyboard')
 const bot = new Telegraf(process.env.BOT_TOKEN);
 const JSON_DB = require('simple-json-db');
 const CONFIG = require("./config.json")
-const modsDB = new JSON_DB('db/modDB.json');
-const usersDB = new JSON_DB('db/usersDB.json');
 const sessionsDB = new JSON_DB('db/sessionsDB.json');
 var registeredCommands = []
 var dynamicQueryListeners = []
@@ -110,6 +108,24 @@ regCmd("/start","🤝 Начало взаимодействия", async (ctx) =>
 })
 
 regCmd("/login", "Получить код для входа на сайт", generateCode)
+
+regCmd("/setperms", "admin only", (ctx) => {
+    const usersDB = new JSON_DB('db/usersDB.json');
+    const text = ctx.message.text
+    const args = text.split(" ")
+    const UID = ctx.user.id
+    const subjectUID = args[1]
+    const accessLevel = args[2]
+    if (!accessLevel || (accessLevel < 0 || accessLevel > 3)) { ctx.reply("Уровень доступа должен быть между 0 и 3"); return }
+    const user_data = usersDB.get(UID)
+    const subject_data = usersDB.get(subjectUID)
+    try {
+        if (user_data.accessLevel <= subject_data.accessLevel) { ctx.reply("Не хватает прав"); return }
+        
+    } catch (error) {
+        ctx.reply(`Error: ${error}`)
+    }
+}, true)
 
 regAction("get_code", generateCode)
 
