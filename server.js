@@ -92,10 +92,10 @@ app.get("/api/validate", async (req, res) => {
     res.json({ valid: valid });
 })
 
-app.get("/api/data", async (req, res) => {
+app.get("/api/dashboard_data", async (req, res) => {
     const sessionsDB = new JSON_DB("db/sessionsDB.json");
     const { session } = req.query;
-    const valid = sessionsDB.has(`_session_${session}`)
+    const user = sessionsDB.gas(`_session_${session}`)
     res.json({ valid: valid });
 })
 

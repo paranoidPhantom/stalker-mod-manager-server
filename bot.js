@@ -113,15 +113,16 @@ regCmd("/setperms", "admin only", (ctx) => {
     const usersDB = new JSON_DB('db/usersDB.json');
     const text = ctx.message.text
     const args = text.split(" ")
-    const UID = ctx.user.id
+    const UID = ctx.message.from.id
     const subjectUID = args[1]
     const accessLevel = args[2]
-    if (!accessLevel || (accessLevel < 0 || accessLevel > 3)) { ctx.reply("Уровень доступа должен быть между 0 и 3"); return }
+    if (!accessLevel || (accessLevel < 0 || accessLevel > 2)) { ctx.reply("Уровень доступа должен быть между 0 и 2"); return }
     const user_data = usersDB.get(UID)
-    const subject_data = usersDB.get(subjectUID)
+    const subject_data = usersDB.get(subjectUID) || {}
     try {
-        if (user_data.accessLevel <= subject_data.accessLevel) { ctx.reply("Не хватает прав"); return }
-        
+        if (!CONFIG.adminIDs.includes(UID)) { if (user_data.accessLevel <= subject_data.accessLevel) { ctx.reply("Не хватает прав"); return } }
+        subject_data.accessLevel = accessLevel
+        usersDB.set(subjectUID, subject_data)
     } catch (error) {
         ctx.reply(`Error: ${error}`)
     }
