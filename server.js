@@ -88,16 +88,47 @@ app.post("/api/login", async (req, res) => {
 app.get("/api/validate", async (req, res) => {
     const sessionsDB = new JSON_DB("db/sessionsDB.json");
     const { session } = req.query;
-    const valid = sessionsDB.has(`_session_${session}`)
+    const valid = sessionsDB.has(`_session_${session}`);
     res.json({ valid: valid });
-})
+});
 
-app.get("/api/dashboard_data", async (req, res) => {
+app.get("/api/dashboard", async (req, res) => {
+    // Get user access level
     const sessionsDB = new JSON_DB("db/sessionsDB.json");
+    const usersDB = new JSON_DB("db/usersDB.json");
+    //
     const { session } = req.query;
-    const user = sessionsDB.gas(`_session_${session}`)
-    res.json({ valid: valid });
-})
+    const { id: UID } = sessionsDB.get(`_session_${session}`);
+    //
+    const { accessLevel } = usersDB.get(UID);
+    // Actual logic
+    switch (accessLevel) {
+        case ("0"): {
+            res.status(403).send("Insufficient access level");
+            break;
+        }
+        case ("1"): {
+            const mods = modsDB.JSON()["mods"];
+            const result = [];
+            mods.forEach((mod, id) => {
+                mod.id = id;
+                if (mod["uploader"] === UID) {
+                    result.push(mod);
+                }
+            });
+            res.json({ mods: result });
+            break
+        }
+        case ("2" || "3"): {
+            const mods = modsDB.JSON()["mods"];
+            mods.forEach((mod, id) => {
+                mod.id = id;
+            });
+            res.json({ mods });
+            break
+        }
+    }
+});
 
 app.listen(port, () => {
     console.clear();

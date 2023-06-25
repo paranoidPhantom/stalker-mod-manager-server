@@ -15,10 +15,11 @@
                 "k_iH7gbyQBA"
             ],
             "platform": "<DataPlatform>",
-            "downloadURL": "http://localhost:3001/",
+            "downloadURL": "https://sjc2.dl.dbolical.com/dl/2022/02/21/rad_multiplayer_open_beta.zip?st=qIn5eLjXH80R_89K6-crvw==&e=1687479766",
             "archive_type": "zip",
             "standalone": true,
-            "game_required": "soc"
+            "game_required": "soc",
+            "uploader": 5491328220
         }
     ]
 }

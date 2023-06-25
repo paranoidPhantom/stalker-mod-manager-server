@@ -41,26 +41,6 @@ const regAction = (action_id, callbackfn) => {
 const Buttons = Markup.inlineKeyboard
 const BTN = Markup.button.callback
 
-const funnyPhrases = [
-    "А нууу, подорвали пацаны!",
-    "Братишка, а ты нудный. В морду давно не получал?",
-    "Херачь их, пацаны!",
-    "Кранты вам всем!",
-    "Закопаем вас, сучье!",
-    "Ааа, ща мы вам, арабы недоделанные!",
-    "Заходи, с боку заходи!",
-    "Берем его тепленького!",
-    "Не мандражуй, пацаны, обходим!",
-    "Быро, обходи, обходи эту шелупонь!",
-    "А ну, чики-брики и в дамки!",
-    "Срисовали нас! Шухер!",
-    "Достало мля в натуре уже всё, понты эти еще фраерские...",
-    "Да манал я эту зону, я в город хочу.",
-    "Нету, мля, жизни, в натуре, нигде нету...",
-    "Эхх... Бабу бы... Приголубил бы любую...",
-    "Гоп-стоп, мы подошли из-за угла..."
-]
-
 const generateCode = async (ctx) => {
     const user = ctx.from
     let code = ""
@@ -85,8 +65,6 @@ const generateCode = async (ctx) => {
     })
     sessionsDB.set("_login_code_"+code, user)
     //
-    await ctx.replyWithDice()
-    await ctx.replyWithMarkdown("***'"+funnyPhrases[Math.floor(Math.random() * funnyPhrases.length)]+"'***")
     setTimeout(async () => {
         await ctx.replyWithMarkdown("```"+code+"```")
     }, 1000);
@@ -145,7 +123,6 @@ try {
     process.once('SIGINT', () => bot.stop('SIGINT'));
     process.once('SIGTERM', () => bot.stop('SIGTERM'));
     bot.launch();
-    console.log("\nBot listening!".rainbow)
 } catch(err) {
     console.log("ERROR STARTING BOT:".red,err.bgRed)
 }
